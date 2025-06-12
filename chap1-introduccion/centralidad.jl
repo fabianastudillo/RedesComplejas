@@ -12,3 +12,8 @@ add_edge!(g, 4, 6)
 # Calcular centralidad de grado
 cent = degree_centrality(g)
 println("Centralidad de grado: $cent")
+
+gplot(
+    g,
+    layout=shell_layout
+)
