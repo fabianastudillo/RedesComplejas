@@ -24,7 +24,7 @@ end
 
 nombreArchivo = "comunidades_por_nodo.txt"
 
-flag = true
+flag = false
 if (flag)
     g = load_edgelist("./EjemplosRedes/facebook_combined.txt")
     # g = generate(PlantedPartition())
@@ -44,4 +44,4 @@ else
 
     println("Comunidades detectadas por nodo: ", communities)
     println("Modularidad: $(modularity(g, communities))")
-end
+end 
