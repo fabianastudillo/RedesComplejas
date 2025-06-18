@@ -17,16 +17,31 @@ function load_edgelist(path::String)
     return g
 end
 
-# g = load_edgelist("./EjemplosRedes/facebook_combined.txt")
+function load_community_dict(filepath::String)
+    lines = readlines(filepath)
+    Dict(parse.(Int, split(line, ",")) for line in lines)
+end
 
-g = generate(PlantedPartition())
+nombreArchivo = "comunidades_por_nodo.txt"
 
-# communities = community_louvain(g)
-community_dict = compute(Louvain(), g)
+flag = true
+if (flag)
+    g = load_edgelist("./EjemplosRedes/facebook_combined.txt")
+    # g = generate(PlantedPartition())
+    # communities = community_louvain(g)
+    community_dict = compute(Louvain(), g)
 
-# Convertir Dict a Vector de comunidades
-# Nota: se debe garantizar que el vector tenga una posición por cada nodo
-communities = [community_dict[i] for i in 1:nv(g)]
+    open(nombreArchivo, "w") do io
+        for (nodo, comunidad) in community_dict
+            println(io, "$nodo,$comunidad")
+        end
+    end
+else
+    community_dict = load_community_dict(nombreArchivo)
+    # Convertir Dict a Vector de comunidades
+    # Nota: se debe garantizar que el vector tenga una posición por cada nodo
+    communities = [community_dict[i] for i in 1:nv(g)]
 
-println("Comunidades detectadas por nodo: ", communities)
-println("Modularidad: $(modularity(g, communities))")
+    println("Comunidades detectadas por nodo: ", communities)
+    println("Modularidad: $(modularity(g, communities))")
+end
