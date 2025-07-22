@@ -20,12 +20,12 @@ camino = reconstruir_camino(visitados, destino)
 
 println("Camino desde $origen a $destino: ", camino)
 
-# # Obtener componentes conectados
-# distancias = gdistances(g, origen)
+# Obtener componentes conectados
+distancias = gdistances(g, origen)
 
-# # Extraer estadísticas
-# amigos_directos = count(x -> x == 1, distancias)
-# amigos_de_amigos = count(x -> x == 2, distancias)
+# Extraer estadísticas
+amigos_directos = count(x -> x == 1, distancias)
+amigos_de_amigos = count(x -> x == 2, distancias)
 
-# println("Amigos directos: $amigos_directos")
-# println("Amigos de amigos: $amigos_de_amigos")
+println("Amigos directos: $amigos_directos")
+println("Amigos de amigos: $amigos_de_amigos")
